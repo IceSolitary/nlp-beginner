@@ -1,6 +1,6 @@
-# NLP-Beginner：自然语言处理入门练习
+# NLP-Beginner：自然语言处理入门练习  
 
-*Tasks from https://github.com/FudanNLP/nlp-beginner*
+*Tasks from https://github.com/FudanNLP/nlp-beginner*  
 
 __注：上传github时因数据集和中间文件过大，因此只上传了代码部分，需自备数据集和预训练词向量，因机器性能限制，词向量均使用glove.6B.50d.txt或glove.6B.300d.txt__
 
@@ -65,7 +65,7 @@ __注：上传github时因数据集和中间文件过大，因此只上传了代
 4. 知识点：
    1. 注意力机制
    2. token2token attetnion
-5. 时间：两周
+5. 时间：两周  
 __注：需使用glove.6B.300d.txt运行glove_processing生成词向量和词表的中间文件__
 
 
@@ -82,7 +82,7 @@ __注：需使用glove.6B.300d.txt运行glove_processing生成词向量和词表
 4. 知识点：
    1. 评价指标：precision、recall、F1
    2. 无向图模型、CRF
-5. 时间：两周
+5. 时间：两周  
 __注：需使用glove.6B.50d.txt运行glove_processing生成词向量和词表的中间文件__
 
 ### 任务五：基于神经网络的语言模型
