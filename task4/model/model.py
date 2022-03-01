@@ -53,7 +53,7 @@ class SLModel(nn.Module):
         # PAD到PAD标签转移概率不为0
         self.transitions.data[tag_to_ix["PAD"], tag_to_ix["PAD"]] = 0
 
-        self.apply(_init_esim_weights)
+        self.apply(_init_weights)
 
     # use DP to calculate partition function
     # 通过best_path_sum  shape(1,label_size) 记录某时刻t对应的所有标签的路径的指数和的对数
@@ -225,9 +225,9 @@ def log_sum_exp(vec):
     return max_score + torch.log(torch.sum(torch.exp(vec - max_score_broadcast)))
 
 
-def _init_esim_weights(module):
+def _init_weights(module):
     """
-    Initialise the weights of the ESIM model.
+    Initialise the weights of the model.
     """
     if isinstance(module, nn.Linear):
         nn.init.xavier_uniform_(module.weight.data)
@@ -238,12 +238,10 @@ def _init_esim_weights(module):
         nn.init.orthogonal_(module.weight_hh_l0.data)
         nn.init.constant_(module.bias_ih_l0.data, 0.0)
         nn.init.constant_(module.bias_hh_l0.data, 0.0)
-        hidden_size = module.bias_hh_l0.data.shape[0] // 4
-        module.bias_hh_l0.data[hidden_size:(2 * hidden_size)] = 1.0
+
 
         if (module.bidirectional):
             nn.init.xavier_uniform_(module.weight_ih_l0_reverse.data)
             nn.init.orthogonal_(module.weight_hh_l0_reverse.data)
             nn.init.constant_(module.bias_ih_l0_reverse.data, 0.0)
             nn.init.constant_(module.bias_hh_l0_reverse.data, 0.0)
-            module.bias_hh_l0_reverse.data[hidden_size:(2 * hidden_size)] = 1.0

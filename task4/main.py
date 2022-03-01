@@ -63,6 +63,8 @@ def main(trainfile, devfile, testfile, vocabfile,
     epochs_count = []
     train_losses = []
     valid_losses = []
+    train_f1 = []
+    valid_f1 = []
 
     # Continuing training from a checkpoint if one was given as argument.
     if checkpoint:
@@ -100,6 +102,7 @@ def main(trainfile, devfile, testfile, vocabfile,
         #         writer.add_histogram(param[0], param[1].grad, epochs)
 
         train_losses.append(epoch_loss)
+        train_f1.append(epoch_F1)
         print("-> Training time: {:.4f}s, loss = {:.4f}, F1_score: {:.4f}"
               .format(epoch_time, epoch_loss, epoch_F1))
 
@@ -109,6 +112,7 @@ def main(trainfile, devfile, testfile, vocabfile,
                                                     word2idx)
 
         valid_losses.append(epoch_loss)
+        valid_f1.append(epoch_F1)
         print("-> Valid. time: {:.4f}s, loss: {:.4f}, F1_score: {:.4f}"
               .format(epoch_time, epoch_loss, epoch_F1))
 
@@ -140,12 +144,12 @@ def main(trainfile, devfile, testfile, vocabfile,
 
     # Plotting of the loss curves for the train and validation sets.
     plt.figure()
-    plt.plot(epochs_count, train_losses, "-r")
-    plt.plot(epochs_count, valid_losses, "-b")
+    plt.plot(epochs_count, train_f1, "-r", label="Training F1")
+    plt.plot(epochs_count, valid_f1, "-b", label="Validation F1")
     plt.xlabel("epoch")
-    plt.ylabel("loss")
-    plt.legend(["Training loss", "Validation loss"])
-    plt.title("Cross entropy loss")
+    plt.ylabel("F1-score")
+    plt.legend()
+    plt.title("F1-score")
     plt.show()
 
 
