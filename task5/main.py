@@ -131,10 +131,10 @@ def pretty_print_poem(poem):  # 令打印的结果更工整
     for s in shige:
         str =  str + s
     print(str)
-    poem_sentences = poem.split('。')
-    for s in poem_sentences:
-        if s != '' and len(s) > 10:
-            print(s + '。')
+    # poem_sentences = poem.split('。')
+    # for s in poem_sentences:
+    #     if s != '' and len(s) > 10:
+    #         print(s + '。')
 
 
 def generate(begin_word,
